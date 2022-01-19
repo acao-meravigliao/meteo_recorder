@@ -49,7 +49,7 @@ class App < Ygg::Agent::Base
       durable: true,
       auto_delete: false,
       arguments: {
-        :'x-message-ttl' => (3 * 86400 * 1000),
+#        :'x-message-ttl' => (3 * 86400 * 1000),
       },
     )).value
 
@@ -92,7 +92,7 @@ class App < Ygg::Agent::Base
         @pg.exec_prepared('insert_meteo', [ payload[:sample_ts], payload[:station_id], 'HUMIDITY', payload[:data][:humidity] ])
       end
 
-      if payload[:data][:temperatur]
+      if payload[:data][:temperature]
         @pg.exec_prepared('insert_meteo', [ payload[:sample_ts], payload[:station_id], 'TEMPERATURE', payload[:data][:temperature] ])
       end
     end
